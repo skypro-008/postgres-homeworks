@@ -7,13 +7,11 @@ def get_data_from_csv(key: str, path: str) -> list:
         reader = csv.DictReader(file)
         data = []
         if key == 'employees':
-            emp_id = 0
             for row in reader:
-                emp_id += 1
                 name = (row['first_name'] + ' ' + row['last_name'])
                 profession = row['title']
                 notes = row['notes']
-                data.append((emp_id, name, profession, notes))
+                data.append((name, profession, notes))
 
         elif key == 'customers':
             for row in reader:
