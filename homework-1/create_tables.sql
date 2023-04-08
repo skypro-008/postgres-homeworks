@@ -22,9 +22,9 @@ SELECT * FROM employees;
 
 CREATE TABLE orders
 (
-	order_id int PRIMARY KEY,
-	customer_id varchar(100) NOT NULL UNIQUE REFERENCES customers (customer_id),
-	employee_id int UNIQUE REFERENCES employees(employee_id),
+	order_id int PRIMARY KEY NOT NULL,
+	customer_id varchar(100) REFERENCES customers (customer_id),
+	employee_id int REFERENCES employees(employee_id),
 	order_date date NOT NULL,
 	ship_city varchar(100) NOT NULL
 )
