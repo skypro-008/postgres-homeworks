@@ -10,13 +10,13 @@ orders = []
 with open('north_data\customers_data.csv', 'r') as file:
     for row in file:
         rows = row.split(',')
-        red_rows = []
+        read_rows = []
         for item in rows:
             item = item.replace('"', '')
             item = item.replace('\n', '')
             item = item.replace("'", '')
-            red_rows.append(item)
-        customers.append(red_rows)
+            read_rows.append(item)
+        customers.append(read_rows)
     customers = customers[1:len(customers)]
 
 with open('north_data\employees_data.csv', 'r') as file:
