@@ -6,10 +6,12 @@ import psycopg2
 #Пароль не указан для безопасности =)
 PASSWORD = ''
 
+#Connection with PostgreSQL
 conn = psycopg2.connect(host='localhost', database='north', user='postgres', password=PASSWORD)
 
 try:
     with conn:
+        #Insert data to employees table
         with conn.cursor() as cur:
             with open('north_data/employees_data.csv', encoding='windows-1251') as f:
                 file_dict = csv.DictReader(f, delimiter=',')
@@ -19,6 +21,7 @@ try:
         cur.close()
         print('Данные успешно добавлены в таблицу Employees')
 
+        # Insert data to customers table
         with conn.cursor() as cur:
             with open('north_data/customers_data.csv', encoding='windows-1251') as f:
                 file_dict = csv.DictReader(f, delimiter=',')
@@ -28,6 +31,7 @@ try:
         cur.close()
         print('Данные успешно добавлены в таблицу Customers')
 
+        # Insert data to orders table
         with conn.cursor() as cur:
             with open('north_data/orders_data.csv', encoding='windows-1251') as f:
                 file_dict = csv.DictReader(f, delimiter=',')
@@ -38,4 +42,5 @@ try:
         print('Данные успешно добавлены в таблицу Orders')
 
 finally:
+    #Close connection
     conn.close()
