@@ -3,6 +3,7 @@ import csv
 import psycopg2
 
 """Скрипт для заполнения данными таблиц в БД Postgres."""
+#Пароль не указан для безопасности =)
 PASSWORD = ''
 
 conn = psycopg2.connect(host='localhost', database='north', user='postgres', password=PASSWORD)
