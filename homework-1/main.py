@@ -4,7 +4,7 @@ import psycopg2
 
 """Скрипт для заполнения данными таблиц в БД Postgres."""
 #Пароль не указан для безопасности =)
-PASSWORD = ''
+PASSWORD = 'Starwars31!@1997'
 
 #Connection with PostgreSQL
 conn = psycopg2.connect(host='localhost', database='north', user='postgres', password=PASSWORD)
@@ -13,7 +13,7 @@ try:
     with conn:
         #Insert data to employees table
         with conn.cursor() as cur:
-            with open('north_data/employees_data.csv', encoding='windows-1251') as f:
+            with open('north_data/employees_data.csv', encoding='UTF-8') as f:
                 file_dict = csv.DictReader(f, delimiter=',')
                 for id, line in enumerate(file_dict, 1):
                     cur.execute('INSERT INTO employees VALUES (%s, %s, %s, %s, %s, %s)',
@@ -23,7 +23,7 @@ try:
 
         # Insert data to customers table
         with conn.cursor() as cur:
-            with open('north_data/customers_data.csv', encoding='windows-1251') as f:
+            with open('north_data/customers_data.csv', encoding='UTF-8') as f:
                 file_dict = csv.DictReader(f, delimiter=',')
                 for line in file_dict:
                     cur.execute('INSERT INTO customers VALUES (%s, %s, %s)',
@@ -33,7 +33,7 @@ try:
 
         # Insert data to orders table
         with conn.cursor() as cur:
-            with open('north_data/orders_data.csv', encoding='windows-1251') as f:
+            with open('north_data/orders_data.csv', encoding='UTF-8') as f:
                 file_dict = csv.DictReader(f, delimiter=',')
                 for line in file_dict:
                     cur.execute('INSERT INTO orders VALUES (%s, %s, %s, %s, %s)',
