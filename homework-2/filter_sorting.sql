@@ -26,4 +26,4 @@ WHERE discontinued <> 1
 
 SELECT MIN(unit_price), MAX(unit_price)
 FROM products
-WHERE discontinued <> 1 AND units_in_stock >= 30
+WHERE discontinued <> 1 AND units_in_stock >= 20
