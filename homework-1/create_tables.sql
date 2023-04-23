@@ -6,6 +6,7 @@ CREATE TABLE employees
 	first_name varchar(100) NOT NULL,
 	last_name varchar(100) NOT NULL,
 	title varchar(100) NOT NULL,
+	birth_date date,
 	notes text NOT NULL
 );
 

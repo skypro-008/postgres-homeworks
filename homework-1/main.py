@@ -10,9 +10,10 @@ def get_data_from_csv(key: str, path:str):
             for row in reader:
                 first_name = row['first_name']
                 last_name = row['last_name']
-                profession = row['title']
-                description = row['notes']
-                data.append((first_name, last_name, profession, description))
+                title = row['title']
+                birth_date = row['birth_date']
+                notes = row['notes']
+                data.append((first_name, last_name, title, birth_date, notes))
 
         elif key == 'customers':
             for row in reader:
@@ -36,13 +37,13 @@ customers = get_data_from_csv('customers', 'north_data/customers_data.csv')
 orders = get_data_from_csv('orders', 'north_data/orders_data.csv')
 
 def main():
-    conn = psycopg2.connect(host='localhost', database='north2', user='postgres', password='12345')
+    conn = psycopg2.connect(host='localhost', database='nort', user='postgres', password='12345')
 
     try:
         with conn:
             with conn.cursor() as cur:
-                cur.executemany('INSERT INTO employees (first_name, last_name, title, notes)' 
-                                'VALUES (%s, %s, %s, %s)', employees)
+                cur.executemany('INSERT INTO employees (first_name, last_name, title, birth_date, notes)' 
+                                'VALUES (%s, %s, %s, %s, %s)', employees)
                 cur.executemany('INSERT INTO customers (customer_id, company_name, contact_name)'
                                 'VALUES (%s, %s, %s)', customers)
                 cur.executemany('INSERT INTO orders (order_id, customer_id, employee_id, order_date, ship_city)'
