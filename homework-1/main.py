@@ -17,7 +17,6 @@ with psycopg2.connect(
                 cur.execute("INSERT INTO employees(first_name, last_name, title, birth_date, notes) VALUES (%s, %s, %s, %s, %s)",
                             (line['first_name'], line['last_name'], line['title'], line['birth_date'], line['notes']))
 
-
     with open('north_data\customers_data.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for line in reader:
