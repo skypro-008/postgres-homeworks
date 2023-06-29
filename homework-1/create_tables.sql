@@ -22,8 +22,8 @@ CREATE TABLE customers
 CREATE TABLE orders
 (
 	order_id int PRIMARY KEY,
-	customer_id CHARACTER VARYING(30) UNIQUE REFERENCES customers(customer_id),
-	employee_id int UNIQUE REFERENCES employees(employee_id),
+	customer_id CHARACTER VARYING(30),
+	employee_id int,
 	order_date date NOT NULL,
 	ship_city CHARACTER VARYING(30)
 );
