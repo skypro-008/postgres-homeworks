@@ -8,6 +8,7 @@ WHERE ship_country IN('France', 'Germany', 'Spain')
 
 SELECT DISTINCT ship_city, ship_country
 FROM orders
+ORDER BY ship_city, ship_country
 
 
 -- 3. сколько дней в среднем уходит на доставку товара в Германию (таблица orders, колонки order_date, shipped_date, ship_country)
