@@ -35,6 +35,5 @@ WHERE NOT EXISTS (SELECT order_id FROM orders WHERE customers.customer_id = orde
 
 -- 4. уникальные названия продуктов, которых заказано ровно 10 единиц (количество заказанных единиц см в колонке quantity табл order_details)
 -- Этот запрос написать именно с использованием подзапроса.
-SELECT DISTINCT(sub.product_name) from (
-SELECT product_name FROM order_details JOIN products USING(product_id) WHERE quantity=10
-) AS sub
+SELECT DISTINCT(sub.product_name) from
+(SELECT product_name FROM order_details JOIN products USING(product_id) WHERE quantity=10 ) AS sub
