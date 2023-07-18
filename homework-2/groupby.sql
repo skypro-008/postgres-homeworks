@@ -20,6 +20,7 @@ WHERE region IS null
 SELECT suppliers.country, count(suppliers.supplier_id)
 FROM public.suppliers
 GROUP BY suppliers.country
+ORDER BY count(suppliers.supplier_id) DESC
 
 -- 5. суммарный вес заказов (в которых известен регион) по странам, но вывести только те результаты, где суммарный вес на страну больше 2750. Отсортировать по убыванию суммарного веса (см таблицу orders, колонки ship_region, ship_country, freight)
 SELECT SUM(orders.freight)
@@ -38,6 +39,6 @@ FROM public.employees
 -- 7. страны, в которых зарегистрированы и заказчики (customers) и поставщики (suppliers), но не зарегистрированы работники (employees).
 SELECT suppliers.country
 FROM public.suppliers as suppliers JOIN public.customers as customers ON suppliers.country=customers.country
-EXCEPT
+INTERSECT
 SELECT employees.country
 FROM public.employees
