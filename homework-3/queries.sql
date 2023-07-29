@@ -32,4 +32,8 @@ SELECT DISTINCT p.product_name
 FROM order_details o_d
 	JOIN products p ON o_d.product_id = p.product_id
 WHERE o_d.quantity = 10
-# подскажите как использовать  подзапрос
+
+# порядок выдачи не соответствует скриншоту
+SELECT DISTINCT product_name FROM products
+WHERE EXISTS(SELECT * FROM order_details WHERE order_details.product_id = products.product_id
+			AND order_details.quantity = 10)
