@@ -1,4 +1,5 @@
 -- SQL-команды для создания таблиц
+
 CREATE TABLE employees
 (
 	employee_id int PRIMARY KEY,
