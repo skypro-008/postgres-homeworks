@@ -8,6 +8,7 @@ packages = [{include = "postgres_homeworks"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+psycopg2-binary = "^2.9.6"
 
 
 [build-system]
