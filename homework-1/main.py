@@ -10,18 +10,22 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
-with open('north_data/employees_data.csv', 'r', encoding="utf-8") as f:
-    next(f)
-    cursor.copy_from(f, 'employees', sep=',')
-
-with open('north_data/employees_data.csv', mode='r') as f:
-    count = 0
+with open('north_data/customers_data.csv', mode='r') as f:
     csvFile = csv.reader(f)
     for row in csvFile:
-        cursor.execute("INSERT INTO employees VALUES(%s, %s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4], row[5]))
+        cursor.execute("INSERT INTO customers_data VALUES(%s, %s, %s)", (row[0], row[1], row[2]))
 
-with open('north_data/orders_data.csv', 'r', encoding="utf-8") as f:
-    next(f)
-    cursor.copy_from(f, 'orders_data', sep=',')
+
+with open('north_data/employees_data.csv', mode='r') as f:
+    csvFile = csv.reader(f)
+    for row in csvFile:
+        cursor.execute("INSERT INTO employees_data VALUES(%s, %s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4], row[5]))
+
+
+with open('north_data/orders_data.csv', mode='r') as f:
+    csvFile = csv.reader(f)
+    for row in csvFile:
+        cursor.execute("INSERT INTO orders_data VALUES(%s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4]))
+
 
 conn.commit()
