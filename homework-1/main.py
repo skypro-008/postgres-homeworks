@@ -25,7 +25,7 @@ with open('north_data/employees_data.csv', mode='r') as f:
 with open('north_data/orders_data.csv', mode='r') as f:
     csvFile = csv.reader(f)
     for row in csvFile:
-        cursor.execute("INSERT INTO orders_data VALUES(%s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4]))
-
+        print(type(row[0]))
+        cursor.execute("INSERT INTO orders_data VALUES(%s, %s, %s, %s, %s)", (int(row[0]), row[1], row[2], row[3], row[4]))
 
 conn.commit()
