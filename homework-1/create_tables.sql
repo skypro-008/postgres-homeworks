@@ -27,7 +27,7 @@ CREATE TABLE customers_data
 
 CREATE TABLE orders_data
 (
-	order_id int,
+	order_id int PRIMARY KEY,
 	customer_id varchar REFERENCES customers_data(customer_id),
 	employee_id int REFERENCES employees_data(employee_id),
 	order_date date,
