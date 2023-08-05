@@ -38,5 +38,4 @@ with open('north_data/orders_data.csv', 'r') as f:
             row
         )
 
-
 conn.commit()
