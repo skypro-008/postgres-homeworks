@@ -10,12 +10,7 @@ if __name__ == '__main__':
     orders_csv = "../homework-1/north_data/orders_data.csv"
 
     # Подкючение к базе данных north
-    conn = psycopg2.connect(host='localhost',
-					database="north",
-                    user='postgres',
-					password='sql2023',
-                    port='5432'
-    )
+    conn = psycopg2.connect(host='localhost', database="north", user='postgres', password='sql2023', port='5432')
 
     conn.autocommit = True
     cursor = conn.cursor()
