@@ -2,6 +2,7 @@
 
 import psycopg2
 
+
 employees_csv = "../homework-1/north_data/employees_data.csv"
 customers_csv = "../homework-1/north_data/customers_data.csv"
 orders_csv = "../homework-1/north_data/orders_data.csv"
