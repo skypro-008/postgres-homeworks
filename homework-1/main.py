@@ -1,7 +1,5 @@
 """Скрипт для заполнения данными таблиц в БД Postgres."""
-
 import psycopg2
-
 
 if __name__ == '__main__':
 
@@ -56,7 +54,6 @@ if __name__ == '__main__':
     cursor.execute(sql_5)
     for i in cursor.fetchall():
         print(i)
-
 
     conn.commit()
     conn.close()
