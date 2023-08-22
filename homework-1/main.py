@@ -49,3 +49,5 @@ with cone as conn:
 
 # Закрытие соединения
 conn.close()
+
+
