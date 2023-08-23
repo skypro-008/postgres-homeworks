@@ -1,15 +1,15 @@
 -- SQL-команды для создания таблиц
 
-#Создание таблицы CUSTOMERS
+-- Создание таблицы CUSTOMERS
 CREATE TABLE customers
 (
     customer_id VARCHAR PRIMARY KEY,
     company_name VARCHAR(50) NOT NULL,
-    contact_name VARCHAR(50) NOT NULL,
-)
+    contact_name VARCHAR(50) NOT NULL
+);
 
 
-#Создание таблицы EMPLOYEES
+-- Создание таблицы EMPLOYEES
 CREATE TABLE employees
 (
     employee_id INTEGER PRIMARY KEY,
@@ -18,10 +18,10 @@ CREATE TABLE employees
     title VARCHAR(50) NOT NULL,
     birth_date DATE,
     notes TEXT
-)
+);
 
 
-#Создание таблицы ORDERS
+-- Создание таблицы ORDERS
 CREATE TABLE orders
 (
     order_id INTEGER PRIMARY KEY,
@@ -29,6 +29,6 @@ CREATE TABLE orders
     employee_id INTEGER REFERENCES employees(employee_id),
     order_date DATE,
     ship_city VARCHAR(30)
-)
+);
 
 
