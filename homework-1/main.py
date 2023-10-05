@@ -6,7 +6,6 @@ FILE_CUSTOMERS_DATA = 'north_data/customers_data.csv'
 FILE_EMPLOYEES_DATA = 'north_data/employees_data.csv'
 FILE_ORDERS_DATA = 'north_data/orders_data.csv'
 
-
 def insert_data_to_sql(filename, name_table):
     with open(filename, 'r', encoding='UTF-8') as file:
         data = csv.DictReader(file)
