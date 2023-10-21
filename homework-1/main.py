@@ -1,14 +1,23 @@
 """Скрипт для заполнения данными таблиц в БД Postgres."""
 import csv
 import psycopg2
+import pathlib
+from pathlib import Path
 
 connect = psycopg2.connect(host="localhost", database="north", user="postgres", password="12345")
 cursor = connect.cursor()
 
-# absolute paths
-file_path_employees = r"C:\Users\janle\PycharmProjects\postgres-homeworks\homework-1\north_data\employees_data.csv"
-file_path_customers = r"C:\Users\janle\PycharmProjects\postgres-homeworks\homework-1\north_data\customers_data.csv"
-file_path_orders = r"C:\Users\janle\PycharmProjects\postgres-homeworks\homework-1\north_data\orders_data.csv"
+work_path = pathlib.Path.cwd()
+
+
+# # absolute paths
+# file_path_employees = r"C:\Users\janle\PycharmProjects\postgres-homeworks\homework-1\north_data\employees_data.csv"
+# file_path_customers = r"C:\Users\janle\PycharmProjects\postgres-homeworks\homework-1\north_data\customers_data.csv"
+# file_path_orders = r"C:\Users\janle\PycharmProjects\postgres-homeworks\homework-1\north_data\orders_data.csv"
+
+file_path_customers = Path(work_path, "north_data", "customers_data.csv")
+file_path_employees = Path(work_path, "north_data", "employees_data.csv")
+file_path_orders = Path(work_path, "north_data", "orders_data.csv")
 
 with open(file_path_employees, "r") as file:
     employees = csv.reader(file)
