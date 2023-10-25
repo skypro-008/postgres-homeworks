@@ -24,7 +24,7 @@ db_config = {
 
 with psycopg2.connect(**db_config) as conn:
     with conn.cursor() as cur:
-        cur.executemany("INSERT INTRO employees VALUES(%S, %S, %S, %S, %S, %S)", [i for i in employees])
-        cur.executemany("INSERT INTRO customers VALUES(%S, %S, %S)", [i for i in customers])
-        cur.executemany("INSERT INTRO orders VALUES(%S, %S, %S, %S, %S)", [i for i in orders])
+        cur.executemany("INSERT INTRO employees VALUES(%s, %s, %s, %s, %s, %s)", [i for i in employees])
+        cur.executemany("INSERT INTRO customers VALUES(%s, %s, %s)", [i for i in customers])
+        cur.executemany("INSERT INTRO orders VALUES(%s, %s, %s, %s, %s)", [i for i in orders])
 conn.close()
