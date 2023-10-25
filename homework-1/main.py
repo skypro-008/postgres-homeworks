@@ -5,7 +5,8 @@ import csv
 def open_csv_file(file):
     with open(file, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
-        return csv_reader
+        data = list(csv_reader)
+    return data
 
 
 employees = open_csv_file('north_data/employees_data.csv')
