@@ -14,7 +14,7 @@ CREATE TABLE employees(employees_id int PRIMARY KEY,
 					   notes text NOT NULL
 					  );
 
-CREATE TABLE order (
+CREATE TABLE orders (
 	order_id int PRIMARY KEY,
 	customer_id varchar(30),
 	employees_id int NOT NULL,
