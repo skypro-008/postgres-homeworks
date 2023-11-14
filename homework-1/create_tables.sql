@@ -14,10 +14,10 @@ CREATE TABLE employees(employees_id int PRIMARY KEY,
 					   notes text NOT NULL
 					  );
 
-CREATE TABLE orders (
+CREATE TABLE order (
 	order_id int PRIMARY KEY,
-	customer_id varchar(30) UNIQUE REFERENCES customers(customer_id),
-	employees_id int UNIQUE REFERENCES employees(employees_id),
+	customer_id varchar(30),
+	employees_id int NOT NULL,
 	order_date varchar(50) NOT NULL,
 	ship_city varchar(100)
 )
