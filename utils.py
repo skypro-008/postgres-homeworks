@@ -1,68 +1,57 @@
+import csv
+import pathlib
+
 import psycopg2
 
+way_customers = pathlib.Path(__file__).parent.joinpath(
+    'homework-1').joinpath('north_data').joinpath('customers_data.csv')
 
-def write_in_customer(file):
-    conn = psycopg2.connect(
-        host="localhost",
-        database="north",
-        user="postgres",
-        password="55555"
-    )
-    id_cus, name_comp, name_cont = file
+way_employees = pathlib.Path(__file__).parent.joinpath(
+    'homework-1').joinpath('north_data').joinpath('employees_data.csv')
 
-    try:
+way_orders = pathlib.Path(__file__).parent.joinpath(
+    'homework-1').joinpath('north_data').joinpath('orders_data.csv')
+
+
+def write_in_customer(conn):
+    with open(way_customers, 'r', encoding='utf8') as file:
+        result = csv.reader(file)
+        next(result)
+
+    for row in result:
         with conn:
             with conn.cursor() as cur:
-                cur.execute('INSERT INTO customers VALUES (%s, %s, %s)', (id_cus,
-                                                                          name_comp,
-                                                                          name_cont))
-
-    finally:
-        conn.close()
+                cur.execute('INSERT INTO customers VALUES (%s, %s, %s)', row)
 
 
-def write_in_employees(file):
-    conn = psycopg2.connect(
-        host="localhost",
-        database="north",
-        user="postgres",
-        password="55555"
-    )
-    employee_id, first_name, last_name, title, birth_date, notes = file
+def write_in_employees(conn):
+    with open(way_employees, 'r', encoding='utf8') as file:
+        result = csv.reader(file)
+        next(result)
 
-    try:
-        with conn:
-            with conn.cursor() as cur:
-                cur.execute('INSERT INTO employees VALUES (%s, %s, %s, %s, %s, %s)', (employee_id,
-                                                                                      first_name,
-                                                                                      last_name,
-                                                                                      title,
-                                                                                      birth_date,
-                                                                                      notes
-                                                                                      ))
-
-    finally:
-        conn.close()
+        for row in result:
+            with conn:
+                with conn.cursor() as cur:
+                    cur.execute('INSERT INTO employees VALUES (%s, %s, %s, %s, %s, %s)', row)
 
 
-def write_in_orders(file):
-    conn = psycopg2.connect(
-        host="localhost",
-        database="north",
-        user="postgres",
-        password="55555"
-    )
-    order_id, customer_id, employee_id, order_date, ship_city = file
+def write_in_orders(conn):
+    with open(way_orders, 'r', encoding='utf8') as file:
+        result = csv.reader(file)
+        next(result)
 
-    try:
-        with conn:
-            with conn.cursor() as cur:
-                cur.execute('INSERT INTO orders VALUES (%s, %s, %s, %s, %s)', (order_id,
-                                                                                customer_id,
-                                                                                employee_id,
-                                                                                order_date,
-                                                                                ship_city
-                                                                                ))
+        for row in result:
+            with conn:
+                with conn.cursor() as cur:
+                    cur.execute('INSERT INTO orders VALUES (%s, %s, %s, %s, %s)', row)
 
-    finally:
-        conn.close()
+
+def read_psql(conn, table):
+
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute(f'SELECT * FROM {table}')
+            row = cur.fetchall()
+
+            for i in row:
+                print(i)
