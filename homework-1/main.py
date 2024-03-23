@@ -3,7 +3,7 @@ import csv
 import os
 
 
-def go():
+def add_data_in_bd():
 	"""Скрипт для заполнения данными таблиц в БД Postgres."""
 	bd = ['employees_data.csv', 'customers_data.csv', 'orders_data.csv']
 	bd_name = ['employees', 'customers', 'orders']
@@ -15,11 +15,11 @@ def go():
 			csvreader = csv.reader(csvfile)
 			for row in csvreader:
 				values = '%s, ' * len(row)
-				cur.execute(f"INSERT INTO {bd_name[i]} ({values[:-2]})", row)
+				cur.execute(f"INSERT INTO {bd_name[i]} VALUES ({values[:-2]})", row)
 			conn.commit()
-		cur.close()
-		conn.close()
+	cur.close()
+	conn.close()
 
 
 if __name__ == '__main__':
-	go()
+	add_data_in_bd()
