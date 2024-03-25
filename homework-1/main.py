@@ -1,9 +1,11 @@
 """Скрипт для заполнения данными таблиц в БД Postgres."""
+import csv
+
 import psycopg2
 from config import EMPLOYEES_DATA_PATH, CUSTOMERS_DATA_PATH, ORDERS_DATA_PATH
 
 
-def connecting():
+def fill_tables():
     # connect to db
     conn = psycopg2.connect(
         host='localhost',
@@ -12,33 +14,37 @@ def connecting():
         password='Iwilldietomorrow92815'
     )
     try:
-        adding_data_in_table(conn, taking_information(CUSTOMERS_DATA_PATH), 'customers', '%s, %s, %s')
-        adding_data_in_table(conn, taking_information(EMPLOYEES_DATA_PATH), 'employees', '%s, %s, %s, %s, %s, %s')
-        adding_data_in_table(conn, taking_information(ORDERS_DATA_PATH), 'orders', '%s, %s, %s, %s, %s')
+        with conn:
+            with conn.cursor() as cur:
+                with open('north_data/customers_data.csv', 'r', encoding='UTF-8') as f:
+                    data = csv.DictReader(f)
+                    for row in data:
+                        cur.execute(
+                            'INSERT INTO customers VALUES(%s, %s, %s)',
+                            (row['customer_id'], row['company_name'], row['contact_name'])
+                        )
+
+                with open('north_data/employees_data.csv', 'r', encoding='UTF-8') as f:
+                    data = csv.DictReader(f)
+                    for row in data:
+                        cur.execute(
+                            'INSERT INTO employees VALUES(%s, %s, %s, %s, %s, %s)',
+                            (row['employee_id'], row['first_name'], row['last_name'],
+                             row['title'], row['birth_date'], row['notes'])
+                        )
+
+                with open('north_data/orders_data.csv', 'r', encoding='UTF-8') as f:
+                    data = csv.DictReader(f)
+                    for row in data:
+                        cur.execute(
+                            'INSERT INTO orders VALUES(%s, %s, %s, %s, %s)',
+                            (row['order_id'], row['customer_id'], row['employee_id'],
+                             row['order_date'], row['ship_city'])
+                        )
 
     finally:
         conn.close()
 
 
-def taking_information(file):
-    # open some files and return data from them
-    with open(file, 'r', encoding='utf8') as f:
-        data = f.readlines()
-
-    return data
-
-
-def adding_data_in_table(conn, data, table_name, count):
-    with conn:
-        with conn.cursor() as cur:
-            for i in range(1, len(data)):
-                print(data[i])
-                data_list = data[i].replace('\n', '').replace('"', '').split(',')
-                if data == EMPLOYEES_DATA_PATH:
-                    data_list[5] = (', '.join([data_list[j] for j in range(5, len(data_list))]))
-
-                cur.execute(f'INSERT INTO {table_name} VALUES ({count})', data_list)
-
-
 if __name__ == '__main__':
-    connecting()
+    fill_tables()
