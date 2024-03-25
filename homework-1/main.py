@@ -13,8 +13,8 @@ def connecting():
     )
     try:
         adding_data_in_table(conn, taking_information(CUSTOMERS_DATA_PATH), 'customers', '%s, %s, %s')
-        adding_data_in_table(conn, taking_information(EMPLOYEES_DATA_PATH), 'employees', '%i, %s, %s, %s, %d, %s')
-        adding_data_in_table(conn, taking_information(ORDERS_DATA_PATH), 'orders', '%i, %s, %i, %d, %s')
+        adding_data_in_table(conn, taking_information(EMPLOYEES_DATA_PATH), 'employees', '%s, %s, %s, %s, %s, %s')
+        adding_data_in_table(conn, taking_information(ORDERS_DATA_PATH), 'orders', '%s, %s, %s, %s, %s')
 
     finally:
         conn.close()
@@ -33,7 +33,10 @@ def adding_data_in_table(conn, data, table_name, count):
         with conn.cursor() as cur:
             for i in range(1, len(data)):
                 print(data[i])
-                data_list = data[i].replace('\n', '').replace(',', ', ')
+                data_list = data[i].replace('\n', '').replace('"', '').split(',')
+                if data == EMPLOYEES_DATA_PATH:
+                    data_list[5] = (', '.join([data_list[j] for j in range(5, len(data_list))]))
+
                 cur.execute(f'INSERT INTO {table_name} VALUES ({count})', data_list)
 
 
