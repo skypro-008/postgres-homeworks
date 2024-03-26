@@ -6,13 +6,13 @@ import psycopg2
 from config import EMPLOYEES_DATA_PATH, CUSTOMERS_DATA_PATH, ORDERS_DATA_PATH
 
 
-def func_fill(cur, file, table, values):
+def func_fill(cur, file, table, value):
     with open(file, 'r', encoding='UTF-8') as f:
         data = csv.DictReader(f)
         for row in data:
             cur.execute(
-                f'INSERT INTO {table} VALUES({values})',
-                (row.values())
+                f'INSERT INTO {table} VALUES({value})',
+                (list(row.values()))
             )
 
 
